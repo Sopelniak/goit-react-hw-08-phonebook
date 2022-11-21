@@ -19,7 +19,6 @@ import { filterContacts } from 'redux/filter/filterSlice';
 import { Section } from '../../components/Section/Section';
 import { Filter } from '../../components/Filter/Filter';
 import { ContactList } from '../../components/ContactList/ContactList';
-import { AddButton } from 'components/Button/Button';
 import { Modal } from 'components/Modal/Modal';
 
 import s from '../ContactsPage/ContactPage.module.scss';
@@ -69,7 +68,7 @@ export const ContactsPage = () => {
       <div className={s.contacts}>
         <div className={s.addButtonBox}>
           <h2 className={s.h2}>Contacts</h2>
-          <AddButton type="button" openModal={openModal} />
+          <button type='button' onClick={openModal('add')}></button>
         </div>
         <Filter filtration={filtration} />
         {isLoading && <p>Loading...</p>}

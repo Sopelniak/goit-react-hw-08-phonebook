@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { registration } from '../../redux/auth/authOperations';
-import { AuthButton } from '../Button/Button';
 
 import s from './RegisterForm.module.scss';
 
@@ -66,7 +65,7 @@ export const RegisterForm = () => {
           onChange={handleChange}
         />
       </label>
-      <AuthButton text={'Register'} />
+      <button type='submit'>Register</button>
     </form>
   );
 };

@@ -1,7 +1,5 @@
-// import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-import { SaveButton } from '../Button/Button';
 import s from './ContactForm.module.scss';
 
 export const ContactForm = ({ addNewContact }) => {
@@ -63,11 +61,7 @@ export const ContactForm = ({ addNewContact }) => {
           onChange={handleContactInput}
         />
       </label>
-      <SaveButton />
+      <button type='submit'>Add</button>
     </form>
   );
 };
-
-// ContactForm.propTypes = {
-//   addNewContact: PropTypes.func.isRequired,
-// };

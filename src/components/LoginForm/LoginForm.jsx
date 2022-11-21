@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/auth/authOperations';
-import { AuthButton } from '../Button/Button';
 
 import s from './LoginForm.module.scss';
 
@@ -51,7 +50,7 @@ export const LoginForm = () => {
           onChange={handleChange}
         />
       </label>
-      <AuthButton text={'LogIn'} />
+      <button type='submit'>LogIn</button>
     </form>
   );
 };
