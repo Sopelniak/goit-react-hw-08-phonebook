@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { editContact } from 'redux/сontacts/contactsOperation';
+import { SaveButton } from '../Button/Button';
 import s from './EditContactForm.module.scss';
 
 export const EditContactForm = ({ contact, closeModal }) => {
@@ -68,8 +69,11 @@ export const EditContactForm = ({ contact, closeModal }) => {
           onChange={handleContactInput}
         />
       </label>
-      <button type='submit'>Save</button>
+      <SaveButton />
     </form>
   );
 };
 
+// EditContactForm.propTypes = {
+//   addNewContact: PropTypes.func.isRequired,
+// };

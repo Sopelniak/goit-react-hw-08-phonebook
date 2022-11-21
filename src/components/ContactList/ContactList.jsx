@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { selectContacts } from 'redux/сontacts/contactsSelectors';
 import { selectFilter } from 'redux/filter/filterSelectors';
 import { Contact } from './ContactItem';
+import { DeleteButton, EditButton } from '../Button/Button';
 import s from './ContactList.module.scss';
 
 export const ContactList = ({ contactDelete, openModal }) => {
@@ -16,10 +17,16 @@ export const ContactList = ({ contactDelete, openModal }) => {
           <li key={contact.id} className={s.item}>
             <Contact contact={contact} />
             <div className={s.buttonBox}>
-              
-              <button onClick={openModal('edit', contact)}>Edit</button>
-              
-              <button onClick={contactDelete(contact.id)}>Delete</button>
+              <EditButton
+                type="button"
+                openModal={openModal}
+                contact={contact}
+              />
+              <DeleteButton
+                type="button"
+                contactDelete={contactDelete}
+                contactId={contact.id}
+              />
             </div>
           </li>
         ))}
