@@ -1,36 +1,25 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { nanoid } from 'nanoid';
-import { selectContacts } from 'redux/users/contacts-selectors';
-import { addContact } from 'redux/users/contactsOparations';
-import s from './Form.module.scss';
+import { useDispatch } from 'react-redux';
+// import { selectContacts } from 'redux/users/contacts-selectors';
+import { editContact } from 'redux/users/contactsOparations';
+import s from './EditContactForm.module.scss';
 
 const INITIAL_FORM_STATE = {
   name: '',
   number: '',
 };
 
-function AddContactForm() {
+function EditContactForm() {
   const [contact, setContact] = useState(INITIAL_FORM_STATE);
-  const contacts = useSelector(selectContacts);
+//   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
-  const addNewContact = () => {
+  const changeContact = () => {
     const newContact = {
       name: contact.name,
       phone: contact.number,
-      id: nanoid(),
     };
-
-    if (
-      contacts.find(
-        ({name}) => name.toLowerCase() === newContact.name.toLowerCase()
-      )
-    ) {
-      return alert(`${newContact.name} is already in contacts`);
-    } else {
-      dispatch(addContact(newContact));
-    }
+    dispatch(editContact(newContact));
   };
 
   const handleInput = ({ target: { name, value } }) => {
@@ -39,7 +28,7 @@ function AddContactForm() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    addNewContact();
+    changeContact();
     setContact({ name: '', number: '' });
   };
 
@@ -80,4 +69,4 @@ function AddContactForm() {
   );
 }
 
-export { AddContactForm };
+export { EditContactForm };

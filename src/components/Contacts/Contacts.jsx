@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts, selectFilter } from 'redux/users/contacts-selectors';
-import { deleteContact } from 'redux/users/contactsOparations';
+import { deleteContact, editContact } from 'redux/users/contactsOparations';
 import s from './Contacts.module.scss';
 
 function Contacts() {
@@ -21,6 +21,13 @@ function Contacts() {
             <span className={s.name}>{name}:</span>
             <div>
               <span className={s.number}>{phone}</span>
+              <button
+                className={s['btn-delete']}
+                onClick={()=>dispatch(editContact(id))}
+                type="button"
+              >
+                Edit
+              </button>
               <button
                 className={s['btn-delete']}
                 onClick={()=>dispatch(deleteContact(id))}
