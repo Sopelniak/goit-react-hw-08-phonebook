@@ -1,12 +1,12 @@
-import { EditContactForm } from 'components/EditContactForm/EditContactForm';
-import { AddContactForm } from 'components/Form/AddContactForm';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 
+import { EditContactForm } from '../EditContactForm/EditContactForm';
+import { ContactForm } from 'components/ContactForm/ContactForm';
 
 import s from '../Modal/Modal.module.scss';
 
-export const Modal = ({ closeModal, param, contact }) => {
+export const Modal = ({ closeModal, param, addNewContact, contact }) => {
   useEffect(() => {
     const closeByEsc = ({ code }) => {
       if (code === 'Escape') {
@@ -32,7 +32,7 @@ export const Modal = ({ closeModal, param, contact }) => {
           {param === 'edit' && (
             <EditContactForm contact={contact} closeModal={closeModal} />
           )}
-          {param === 'add' && <AddContactForm />}
+          {param === 'add' && <ContactForm addNewContact={addNewContact} />}
         </div>
       </div>
     </>

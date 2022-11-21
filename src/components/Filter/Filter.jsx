@@ -1,25 +1,26 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { filterUsers } from 'redux/users/filterSlice';
-import { selectFilter } from 'redux/users/contacts-selectors';
+import PropTypes from 'prop-types';
 
-function Filter() {
-  const filter = useSelector(selectFilter);
-  const dispatch = useDispatch();
+import s from '../ContactForm/ContactForm.module.scss';
+
+export const Filter = ({ filtration }) => {
+  const handleFilterInput = ({ target: { value } }) => {
+    filtration(value.toLowerCase());
+  };
 
   return (
-    <>
-      <label>
-        <span>Find contacts by name</span>
-
-        <input
-          onChange={e => dispatch(filterUsers(e.target.value))}
-          value={filter}
-          type="text"
-          name="filter"
-        />
-      </label>
-    </>
+    <label className={s.label}>
+      Find contacts by name
+      <input
+        className={s.input}
+        type="text"
+        name="filter"
+        required
+        onChange={e => handleFilterInput(e)}
+      />
+    </label>
   );
-}
+};
 
-export { Filter };
+Filter.propTypes = {
+  filtration: PropTypes.func.isRequired,
+};

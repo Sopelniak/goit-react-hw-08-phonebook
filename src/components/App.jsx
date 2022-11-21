@@ -1,33 +1,32 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
-import { selectIsFetchingCurrentUser } from 'redux/auth/auth-selectors';
-import { fetchCurrentUser } from 'redux/auth/authOparations';
-import { Layout } from './Layout/Layout';
-import { PublicRoute } from 'HOCs/PublicRoute';
+import { useDispatch, useSelector } from 'react-redux';
 import { HomePage } from 'pages/HomePage/HomePage';
-import { Route, Routes } from 'react-router-dom';
-import { RegisterPage } from 'pages/RegisterPage/RegisterPage';
-import { LoginPage } from 'pages/LoginPage/LoginPage';
-import { PrivateRoute } from 'HOCs/PrivateRoute';
 import { ContactsPage } from 'pages/ContactsPage/ContactsPage';
+import { LoginPage } from 'pages/LoginPage/LoginPage';
+import { RegisterPage } from 'pages/RegisterPage/RegisterPage';
+import { Layout } from './Layout/Layout';
+import { fetchCurrentUser } from 'redux/auth/authOperations';
+import { selectIsFetchingCurrentUser } from 'redux/auth/authSelectors';
+import { PublicRoute } from 'HOCs/PublicRoute';
+import { PrivateRoute } from 'HOCs/PrivateRoute';
 
 export const App = () => {
-  // const isFetchingCurrentUser = useSelector(selectIsFetchingCurrentUser);
-  // const dispatch = useDispatch();
+  const isFetchingCurrentUser = useSelector(selectIsFetchingCurrentUser);
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(fetchCurrentUser());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
 
   return (
     <>
-    <p>gggg</p>
-      {/* {!isFetchingCurrentUser && (
+      {!isFetchingCurrentUser && (
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route
               index
-              element={   
+              element={
                 <PublicRoute>
                   <HomePage />
                 </PublicRoute>
@@ -59,29 +58,7 @@ export const App = () => {
             />
           </Route>
         </Routes>
-      )} */}
+      )}
     </>
   );
 };
-// function App() {
-//   const contacts = useSelector(selectContacts);
-//   const dispatch = useDispatch();
-
-//   useEffect(()=>{
-//     dispatch(fetchContacts())
-//   },[dispatch])
-
-//   return (
-//     <>
-//       <Section title="Phonebook">
-//         <AddContactForm />
-//       </Section>
-//       {contacts.length > 0 && (
-//         <Section title="Contacts">
-//           <Filter />
-//           <Contacts />
-//         </Section>
-//       )}
-//     </>
-//   );
-// }

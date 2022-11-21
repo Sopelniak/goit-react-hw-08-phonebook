@@ -2,8 +2,11 @@ import { Navigation } from 'components/Navigation/Navigation';
 import { AuthNavigation } from 'components/AuthNavigation/AuthNavigation';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { selectToken } from 'redux/auth/auth-selectors';
-import { logout } from 'redux/auth/authOparations';
+import { selectToken } from 'redux/auth/authSelectors';
+import { logout } from 'redux/auth/authOperations';
+import { LogOutButton } from '../Button/Button';
+
+// import { UserAuthMenu } from 'components/UserAuthMenu/UserAuthMenu';
 
 import s from './AppBar.module.scss';
 
@@ -18,9 +21,7 @@ export const AppBar = () => {
     <div className={s.appBar}>
       <Navigation />
       {!token && <AuthNavigation />}
-      {token && <button type='button' onClick={clickHeandler}>LogOut</button>
-      }
-      
+      {token && <LogOutButton text={'LogOut'} clickHeandler={clickHeandler} />}
     </div>
   );
 };

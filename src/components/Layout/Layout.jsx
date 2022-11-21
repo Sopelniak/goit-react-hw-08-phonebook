@@ -7,10 +7,10 @@ import s from './Layout.module.scss';
 
 export const Layout = () => {
   return (
-    <div className={s.layoutBox}>bbbb
-      {/* <AppBar />
+    <div className={s.layoutBox}>
+      <AppBar />
       <UserAuthMenu />
-      <Outlet /> */}
+      <Outlet />
     </div>
   );
 };

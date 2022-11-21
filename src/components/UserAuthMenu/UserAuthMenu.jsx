@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { selectUserName, selectUserEmail } from 'redux/auth/auth-selectors';
+import { selectUserName, selectUserEmail } from 'redux/auth/authSelectors';
 
 import s from './UserAuthMenu.module.scss';
 

@@ -1,19 +1,35 @@
+import { nanoid } from 'nanoid';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Contacts } from 'components/Contacts/Contacts';
-import { AddContactForm } from 'components/Form/AddContactForm';
-import { selectContacts, selectError, selectIsLoading } from 'redux/users/contacts-selectors';
-import { fetchContacts } from 'redux/users/contactsOparations';
-import { Section } from 'components/Section/Section';
-import { Filter } from 'components/Filter/Filter';
+
+import {
+  selectContacts,
+  selectLoading,
+  selectError,
+} from 'redux/сontacts/contactsSelectors';
+import {
+  fetchContacts,
+  addContact,
+  deleteContact,
+} from 'redux/сontacts/contactsOperation';
+import { filterContacts } from 'redux/filter/filterSlice';
+
+import { Section } from '../../components/Section/Section';
+import { Filter } from '../../components/Filter/Filter';
+import { ContactList } from '../../components/ContactList/ContactList';
+import { AddButton } from 'components/Button/Button';
 import { Modal } from 'components/Modal/Modal';
+
+import s from '../ContactsPage/ContactPage.module.scss';
 
 export const ContactsPage = () => {
   const [modalIsOpen, setmodalIsOpen] = useState('');
   const [currentContact, setcurrentContact] = useState(null);
 
   const contacts = useSelector(selectContacts);
-  const isLoading = useSelector(selectIsLoading);
+  const isLoading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const dispatch = useDispatch();
 
@@ -21,7 +37,23 @@ export const ContactsPage = () => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
+  const addNewContact = contact => {
+    const newContact = {
+      id: nanoid(),
+      ...contact,
+    };
+    contacts.some(({ name }) => name === contact.name)
+      ? Notify.failure(`${contact.name} is already in contacts!`)
+      : dispatch(addContact(newContact));
+  };
 
+  const filtration = filterKey => {
+    dispatch(filterContacts(filterKey));
+  };
+
+  const contactDelete = id => {
+    dispatch(deleteContact(id));
+  };
 
   const openModal = (param, contact) => {
     setmodalIsOpen(param);
@@ -33,27 +65,27 @@ export const ContactsPage = () => {
   };
 
   return (
-
-    <>
-      <Section title="Phonebook">
-        <AddContactForm />
-      </Section>
-      {contacts.length > 0 && (
-        <Section title="Contacts">
-          <Filter />
-          <Contacts />
-        </Section>
-      )}
+    <Section>
+      <div className={s.contacts}>
+        <div className={s.addButtonBox}>
+          <h2 className={s.h2}>Contacts</h2>
+          <AddButton type="button" openModal={openModal} />
+        </div>
+        <Filter filtration={filtration} />
+        {isLoading && <p>Loading...</p>}
+        {error && <p> {error} </p>}
+        {!isLoading && !error && (
+          <ContactList contactDelete={contactDelete} openModal={openModal} />
+        )}
+      </div>
       {modalIsOpen && (
         <Modal
           closeModal={closeModal}
           param={modalIsOpen}
+          addNewContact={addNewContact}
           contact={currentContact}
         />
       )}
-    </>
-
-   
-      
+    </Section>
   );
 };

@@ -1,6 +1,6 @@
 import { LoginForm } from 'components/LoginForm/LoginForm';
 import { useSelector } from 'react-redux';
-import { selectToken } from 'redux/auth/auth-selectors';
+import { selectToken } from 'redux/auth/authSelectors';
 
 export const LoginPage = () => {
   const token = useSelector(selectToken);

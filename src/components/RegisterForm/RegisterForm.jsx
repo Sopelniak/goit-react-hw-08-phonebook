@@ -1,29 +1,39 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { registration } from 'redux/auth/authOparations';
+import { registration } from '../../redux/auth/authOperations';
+import { AuthButton } from '../Button/Button';
+
 import s from './RegisterForm.module.scss';
 
-const INITIAL_FORM_STATE = {
-  name: '',
-  email: '',
-  password: '',
-};
-
 export const RegisterForm = () => {
-  const [user, setUser] = useState(INITIAL_FORM_STATE);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
 
   const handleChange = ({ target: { name, value } }) => {
-    setUser(prev => ({ ...prev, [name]: value }));
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+      default:
+        break;
+    }
   };
-
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(registration(user));
-    setUser(INITIAL_FORM_STATE);
+    dispatch(registration({ name, email, password }));
+    setName('');
+    setEmail('');
+    setPassword('');
   };
-
   return (
     <form className={s.form} onSubmit={handleSubmit}>
       <label className={s.label}>
@@ -32,7 +42,7 @@ export const RegisterForm = () => {
           className={s.input}
           type="text"
           name="name"
-          value={user.name}
+          value={name}
           onChange={handleChange}
         />
       </label>
@@ -42,7 +52,7 @@ export const RegisterForm = () => {
           className={s.input}
           type="email"
           name="email"
-          value={user.email}
+          value={email}
           onChange={handleChange}
         />
       </label>
@@ -52,11 +62,11 @@ export const RegisterForm = () => {
           className={s.input}
           type="password"
           name="password"
-          value={user.password}
+          value={password}
           onChange={handleChange}
         />
       </label>
-      <button type="submit">Regicter</button>
+      <AuthButton text={'Register'} />
     </form>
   );
 };

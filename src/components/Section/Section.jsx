@@ -1,19 +1,14 @@
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { selectToken } from 'redux/auth/authSelectors';
 
-function Section({ title, children }) {
-  return (
-    <>
-      <section>
-        <h2>{title}</h2>
-        {children}
-      </section>
-    </>
-  );
-}
+import s from './Section.module.scss';
 
-export { Section };
+export const Section = ({ children }) => {
+  const token = useSelector(selectToken);
+  return <>{token && <section className={s.section}> {children}</section>}</>;
+};
 
 Section.propTypes = {
-  title: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 };
