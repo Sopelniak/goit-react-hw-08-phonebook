@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -74,6 +74,7 @@ export const EditContactForm = ({ contact, closeModal }) => {
   );
 };
 
-// EditContactForm.propTypes = {
-//   addNewContact: PropTypes.func.isRequired,
-// };
+EditContactForm.propTypes = {
+  contact: PropTypes.object.isRequired,
+  closeModal: PropTypes.func.isRequired,
+};

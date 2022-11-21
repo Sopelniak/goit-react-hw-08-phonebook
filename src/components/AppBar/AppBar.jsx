@@ -6,8 +6,6 @@ import { selectToken } from 'redux/auth/authSelectors';
 import { logout } from 'redux/auth/authOperations';
 import { LogOutButton } from '../Button/Button';
 
-// import { UserAuthMenu } from 'components/UserAuthMenu/UserAuthMenu';
-
 import s from './AppBar.module.scss';
 
 export const AppBar = () => {

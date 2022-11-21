@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import { SaveButton } from '../Button/Button';
@@ -68,6 +68,6 @@ export const ContactForm = ({ addNewContact }) => {
   );
 };
 
-// ContactForm.propTypes = {
-//   addNewContact: PropTypes.func.isRequired,
-// };
+ContactForm.propTypes = {
+  addNewContact: PropTypes.func.isRequired,
+};
